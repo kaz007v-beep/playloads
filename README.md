@@ -1,56 +1,48 @@
-# GateCrasher v5: Ultimate 403/401 Bypass Tool 🛡️
+# 🔓 403 Bypass Practice Lab
 
-GateCrasher is a high-performance, multi-threaded penetration testing tool designed to automate the detection of **403 Forbidden** and **401 Unauthorized** bypasses. By combining structural path mutations, header injection, and protocol manipulation, it identifies misconfigurations in WAFs, Proxies, and Backend servers.
+<img width="1740" height="956" alt="Screenshot_2025-12-23_20-15-34" src="https://github.com/user-attachments/assets/ca351c79-3258-41b4-95a3-aa1fcb3a7d9e" />
 
-## 🚀 Key Features
+A bug bounty practice lab demonstrating various 403 Forbidden bypass techniques.
 
-* **Omni-Vector Mutation Engine:** Automatically generates case-swapping, single/double URL encoding, and null-byte variations.
-* **Header Spoofing:** Injects common bypass headers (`X-Forwarded-For`, `X-Original-URL`) and Host-header (`localhost`) spoofing.
-* **Multi-Method Fuzzing:** Cycles through all verbs in your `methods.txt` (GET, POST, PUT, PATCH, etc.) against every payload.
-* **Advanced Path Normalization:** Tests for double slashes, trailing slashes, and dot-segment bypasses.
-* **Smart Filtering:** Uses unique response length filtering to reduce noise and includes a configurable results limit (`-r`).
+Created by **zack0x01** | [Learn Bug Bounty](https://lureo.shop) | [YouTube](https://youtube.com/@zack0x01) | [Twitter](https://twitter.com/zack0x01)
 
-## 🛠️ Installation
+## 🚀 Installation
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/pranay-root/403_bypass.git
-   cd 403_bypass
-
-2. **Create and activate a virtual environment:**
-   ```bash
-   python3 -m venv env
-   source env/bin/activate
-   ```
-   
-3. **Install dependencies:**
-   ```bash
-   pip3 install -r requirements.txt
-   ```
-
-## 📖 Usage
-
-Basic usage against a protected endpoint:
+**Quick Start:**
 ```bash
-python3 gatecrasher.py -u https://target.com/admin -t 10 -fc 404,403
+chmod +x start.sh
+./start.sh
 ```
 
-### Arguments:
-| Flag | Description | Default |
-| :--- | :--- | :--- |
-| `-u` | Target URL (Required) | None |
-| `-t` | Number of concurrent threads | 30 |
-| `-fc`| Status codes to filter/ignore | 403,404 |
-| `-r` | Max unique results to find before stopping | 3 |
+**Manual Installation:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
 
-## 🧪 Targeted Bypass Techniques
+Open **http://localhost:5000** in your browser.
 
-The tool specifically targets the following common misconfigurations:
-1.  **HTTP Verb Tampering:** Testing if restricted paths allow `POST` or `PUT` when `GET` is blocked.
-2.  **Case-Sensitivity:** Exploiting systems where `/admin` is blocked but `/Admin` is allowed.
-3.  **Path Normalization:** Using `//`, `/./`, or `..;/` to confuse WAF path-matching rules.
-4.  **Host Header Spoofing:** Changing the `Host` header to `localhost` to bypass internal-only access controls.
-5.  **IP-Based Access Control:** Injecting headers like `X-Forwarded-For: 127.0.0.1` to spoof internal origin.
+## 🎮 Challenges
 
-## ⚠️ Disclaimer
-This tool is for educational and authorized security testing purposes only. Usage against targets without prior mutual consent is illegal. The author assumes no liability for misuse.
+8 different 403 bypass challenges:
+
+1. **HTTP Verb Bypass** - `/admin/secret`
+2. **HTTP Header Bypass** - `/internal/data`
+3. **Path Encoding Bypass** - `/protected/files`
+4. **Path Case Bypass** - `/sensitive/info`
+5. **Path Slash Bypass** - `/restricted/area`
+6. **Parameter Pollution** - `/api/user?id=123`
+7. **Host Header Bypass** - `/local/admin`
+8. **Method Override Bypass** - `/api/update`
+
+Each challenge returns **403 Forbidden** - bypass it to get the flag!
+
+## 📚 Resources
+
+- [HackTricks 403 Bypass Guide](https://book.hacktricks.wiki/en/network-services-pentesting/pentesting-web/403-and-401-bypasses.html)
+
+## 📝 License
+
+Educational purposes only. Use responsibly.
